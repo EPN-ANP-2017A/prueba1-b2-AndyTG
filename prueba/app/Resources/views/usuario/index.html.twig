@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Lista de Usuarios</h1>
+
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cedula</th>
+                <th>Fecha nacimiento</th>
+                <th>Acciones</th>
+                <th>Seleccionar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td><a href="{{ path('usuario_show', { 'id': usuario.id }) }}">{{ usuario.id }}</a></td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.cedula }}</td>
+                <td>{% if usuario.fechaNac %}{{ usuario.fechaNac|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('usuario_show', { 'id': usuario.id }) }}">Mostrar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('usuario_edit', { 'id': usuario.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+                <td><a class="btn btn-info" href="{{ path('plato_index',{ 'id': usuario.id }) }}">Seleccionar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li class="btn btn-primary">
+            <a class ="text-white" href="{{ path('usuario_new') }}">Nuevo Usuario</a>
+        </li>
+    </ul>
+{% endblock %}

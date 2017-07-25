@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Usuario</h1>
+
+    <table class="table">
+        <tbody class="">
+            <tr>
+                <th>Id</th>
+                <td>{{ usuario.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ usuario.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Cédula</th>
+                <td>{{ usuario.cedula }}</td>
+            </tr>
+            <tr>
+                <th>Fecha nacimiento</th>
+                <td>{% if usuario.fechaNac %}{{ usuario.fechaNac|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li class="btn btn-primary">
+            <a class="text-white" href="{{ path('usuario_index') }}">Regresar a la Lista</a>
+        </li>
+        <li class="btn btn-warning">
+            <a class="text-white" href="{{ path('usuario_edit', { 'id': usuario.id }) }}">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
